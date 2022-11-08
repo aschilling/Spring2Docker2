@@ -4,8 +4,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 public interface GreetingRestController {
     @GetMapping
-    String getGreeting(String lang, String username, String apikey);
+    String getGreeting(String apikey);
 
-    @GetMapping("/version")
-    String getVersion();
 }

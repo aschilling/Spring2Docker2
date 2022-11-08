@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 @Slf4j
 @RestController
-@RequestMapping("/v1/api/greetings")
+@RequestMapping("/")
 public class GreetingRestControllerImpl implements GreetingRestController {
 
     private GreetingService greetingService;
@@ -26,23 +26,14 @@ public class GreetingRestControllerImpl implements GreetingRestController {
     @Override
     @GetMapping
     @Operation(summary = "Returns the customized greeting")
-    public String getGreeting(@RequestParam(value = "lang",defaultValue = "de") @Parameter(description = "The prefered language for which the wellcome message will be adopted.") String lang,
-                              @RequestHeader(value = "username", defaultValue = "") @Parameter(description = "The username of the particular user") String username,
-                              @RequestHeader(value = "apikey", defaultValue = "") @Parameter(description = "The apikey of the particular user") String apikey){
+    public String getGreeting(@RequestParam(value = "apikey", defaultValue = "") @Parameter(description = "The apikey of the particular user") String apikey){
 
         //Abhängig von der gewählten Umgebungsvariable wird der übergebene username ausgegeben
         if (stage.trim().equals("dev")){
-            log.info("Calling user is "+ username);
+            log.info("Calling apikey is "+ apikey);
         }
 
-        return this.greetingService.getGreeting(lang);
-    }
-
-    @Override
-    @GetMapping("/version")
-    @Operation(summary = "Returns the current version of the service")
-    public String getVersion(){
-        return this.greetingService.getVersion();
+        return this.greetingService.getGreeting();
     }
 
 }

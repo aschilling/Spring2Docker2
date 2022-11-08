@@ -1,5 +1,4 @@
 FROM openjdk:16-jdk-slim
-ENV demo.version=0.9
 ENV Spring.profiles.active=prod
 RUN mkdir app
 WORKDIR app/
